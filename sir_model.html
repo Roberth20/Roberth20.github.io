@@ -11,6 +11,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -52,54 +54,64 @@
 							<div class="wrapper">
 								<div class="inner">
 
-									<h3 class="major">The first hypothesis</h3>
-									<p>The relationship between Venezuela and the rest of the world's countries was studied. 
-										To find this it was necessary to scale the data of all the countries, after that,
-										explore the data graphically. It was observed that the graphs for each country seem to have some 
-										similarity between them,
-										therefore, the linear correlation of each country with Venezuela was tested.
-										It found that there is a linear relationship with certain countries, 
-										these were used as independent variables in a linear regression model. 
-										The results obtained in this way were good, but with a deficiency in the precision compared to real data. 
+									<h3 class="major">Some concepts</h3>
+									<p>The objective of this project was to build and study the feasibility of the SIR 
+										epidemiological model. This one, optimized with the exponential smoothing technique to 
+										forecast future Covid-19 infections. The SIR model divides the population into subpopulations: 
+										susceptible, infected, and recovered. The main premise of this model is that people 
+										will go through each group following the steps S -> I -> R. The recovered ones are 
+										immune to re-infection, and it does not consider the natality and mortality. For more
+										information about SIR model you can check the wikipedia website:  
+										<a href="https://es.wikipedia.org/wiki/Modelo_SIR" target="_blank">https://es.wikipedia.org/wiki/Modelo_SIR</a>
+									</p>
+									<p>
+										On the other hand, the exponential smoothing methods are weighted averages of 
+										past observations, with the weights decaying exponentially as the observation
+										get older. References to <a href="https://otexts.com/fpp2/expsmooth.html" target="_blank"> Hyndman, Rob J., and George Athanasopoulos. Forecasting: principles and practice. OTexts, 2014.</a>
+									</p>
+									<h3 class="major">Development</h3>
+									<p>The development of the model began to adjust SIR model into Colombia's data and 
+										on this way, it would find infection (\(\beta\)) and recovery rates (\(\gamma\)). Those are necessary to forecast. 
+										The equations that follow the model are:
+										$$ \begin{split}
+										\frac{dS}{dt} &= -\beta S I\\
+										\frac{dI}{dt} &= \beta SI - \gamma I\\
+										\frac{dR}{dt} &= \gamma I
+										\end{split} $$
+										Subsequently, Exponential Smoothing technique was 
+										applied on infection and recovery rates to forecast future values of specified timeframe.
+										In this examples, 20 days into the future from train set. 
 									</p>
 									<div class="row gtr-uniform">
-												<div class="col-6"><span class="image fit"><img src="images/Global_covid/1.png" alt="" /></span></div>
-												<div class="col-6"><span class="image fit"><img src="images/Global_covid/2.png" alt="" /></span></div>
+										<div class="col-12"><span class="image fit"><img src="images/sir_model/tasas.png" alt="" /></span></div>
 									</div>
 									<br>
-									<h3 class="major">The second thougth</h3>
-									<p>Due to this, it was decided to study the case with a VARMA multivariable time series model. 
-										It was evaluated the AdFuller test for seasonality of the data and the Granger causality test for the 
-										causality relationship between the variables, The results from the tests determined that this model was
-										not viable.
-									</p>
-									<h3 class="major">Last resort</h3>
-									<p>Finally, a multivariate ARIMA model implemented that presented good results for individual 
-										predictions, but was very imprecise when combining all predictors linearly. This effect was due to the 
-										gap in the peaks of infections between each country and their variations in scale (the data being stationary).
-										In conclusion, the data obtained show that a global model for a single country is not valid in terms 
-										of precision, but it is useful for providing indications of contagion trends. This is perfect for 
-										confirming results from local models in each country, like Holt's Exponential Smoothing, SIR or 
-										SEIR model, ARIMA and ARIMAX.</p>
+									<h3 class="major">Forecasting cases</h3>
+									<p>With the previous information, SIR model was used again to calculate each 
+										population numbers on the future. The results show a high precision for 
+										the Susceptible and Recovered populations with the selected timeframe. 
+										However, the results in the infected population show that they are viable
+										for timeframes lesser, but forecasting 20 days into the future give us a good
+									approximation.</p>
 									<div class="row gtr-uniform">
-										<div class="col-12"><span class="image fit"><img src="images/Global_covid/3.png" alt="" /></span></div>
+										<div class="col-12"><span class="image fit"><img src="images/sir_model/sir.png" alt="" /></span></div>
 									</div>
 									<br>
-									<p>One of the biggest obstacles in this study was the irregularity of the data from Venezuela.
-										As can be seen, they tend to be very erratic, almost random. This pattern makes it difficult to
-										ability of the model to make accurate predictions. You can test here 
-										<a href="index.html"> interactive demo dashboard</a> 
-										of the project to go deeper on the graphs.
+									<p> The model can be tested in that	<a href="https://modelo-sir-robmago.herokuapp.com/" target="_blank"> interactive demo dashboard</a> .
+										It can be explored the data with differents train/test splits forecasting 20 days into the 
+										future. 
 									</p>
-									<h3 class="major">Vitae phasellus</h3>
-									<p>Cras mattis ante fermentum, malesuada neque vitae, eleifend erat. Phasellus non pulvinar erat. Fusce tincidunt, nisl eget mattis egestas, purus ipsum consequat orci, sit amet lobortis lorem lacus in tellus. Sed ac elementum arcu. Quisque placerat auctor laoreet.</p>
+									<h3 class="major">Related projects</h3>
+									<p>Reaching mastery in an area of knowledge can only be achieved with constant learning and development. 
+										Below, I present personal and professional projects that have brought experience and tools to my career.</p>
 
 									<section class="features">
 										<article>
-											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-											<h3 class="major">Sed feugiat lorem</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="#" class="special">Learn more</a>
+											<a href="global_respone_covid-19.html" class="image"><img src="images/Global_covid/1.png" alt="" /></a>
+											<h3 class="major">Global Covid-19 relation of Venezuela</h3>
+											<p>The goal in this project was to study if It could be possible the construction of a model
+												that use the global data to make predictions about Covid-19 at Venezuela.</p>
+											<a href="global_respone_covid-19.html" class="special">Learn more</a>
 										</article>
 										<article>
 											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
