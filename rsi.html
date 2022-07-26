@@ -6,11 +6,13 @@
 -->
 <html>
 	<head>
-		<title>Text Recomendation System</title>
+		<title>RSI</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -19,7 +21,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="index.html">Roberth Marcano</a></h1>
+						<h1><a href="index.html">Roberth Marcano </a></h1>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
@@ -42,10 +44,8 @@
 					<section id="wrapper">
 						<header>
 							<div class="inner">
-								<h2>Machine learning model to recomend text</h2>
-								<p>The goal in this project was develop a system to recomend text (courses
-									on a website) using a database and machine learning techniques.
-								</p>
+								<h2>Trading strategy: RSI</h2>
+								<p>Development of automatic relative strenght index trading strategy.</p>
 							</div>
 						</header>
 
@@ -53,43 +53,64 @@
 							<div class="wrapper">
 								<div class="inner">
 
-									<h3 class="major">Brief description of work</h3>
-									<p>The Machine Learning project for text recommendation began by studying 
-										the information and structure contained in the database related to it. 
-										Once this step was done, it was necessary to clean and adjust the format 
-										of the data to convert it into information suitable for use in the system 
-										that was being developed.
+									<h3 class="major">Basic theory</h3>
+									<p>The Relative Strenght Index is a simple oscillator used in technical analysis to measure
+										how much the price of an asset is overvaluated or undervaluated. The index move on a scale 
+										from zero to 100 and traditionally a reading of 70 or above indicates an overbought situation. 
+										Meanwhile, a reading of 30 or below indicates an oversold condition. 
 									</p>
-
-									<p>Using natural language processing (NLP) techniques, a system was built that, 
-										by means of sentences or words, performs a text search by similarity in the 
-										database and returns them in JSON format for use in Web applications.
+									<p>
+										The RSI is calculated with two step. First, it's calculated the average RSI for a look-back period,
+										usually 14 days. With the equation:
+										$$
+										RSI_{one} = 100 - \left[ \frac{100}{1 + \frac{Average gain}{Avergare loss}} \right]
+										$$	
+										After that calculation is done for the look-back period, the data is used to calculate the RSI for 
+										the day.
+										$$
+										RSI_{two} = 100 - \left[ \frac{100}{1 + \frac{(Previous Average Gain\times 13) + Current Gain}{(Previous Average Loss\times 13) + Current Loss}} \right]
+										$$
 									</p>
-										
-									<p>Once the system is finished, it is deployed in the form of an API to offer 
-										the service. As a future step, in agreement with the client, it can be 
-										integrated into a web service and data retribution can be automated, 
-										without the need for user intervention.
+									<h3 class="major">Development</h3>
+									<p>The development of the system began getting the data from Binance using Websockets to get a 
+										continuous stream of data. While the information arrive to the program, it is pre-processed 
+										to a format easy to use and the system implement the strategy. If there is a chance, the program
+										set an OCO order on the platform and finish the cycle.  
 									</p>
-
-									<!--<h3 class="major">Related projects</h3>
+									<p> On practice, the system was deployed on the test chain of Binance in the BTCUSDT pair. The strategy
+										worked on the 15 minutes stream with standard look-back period of 14. The top and bottom level were set
+										to 75 and 25, respectively. Finally, the OCO orders were adjusted, to reduce risk, with stop Loss
+										1% of losses and take profits on 5% of gains.
+									</p>
+									<h3 class="major">Results</h3>
+									<p>
+										After a week of testing with bearish feeling on the cryptocurrency market. The system report gains  
+										of 10.16%, this may result in the fact that BTCUSDT is lateralizing between 17,000 and 24,000, the situation
+										offer a great opportunity to this kind of strategy.
+									</p>
+									<p>The strategy worked very well. Yet, it is necessary more testing time to have a conclusive idea of the effectiveness
+										of the strategy before be deployed on a real account. Meanwhile, it will be explored other strategies
+										to be integrated.
+									</p>
+									<h3 class="major">Related projects</h3>
 									<p>Reaching mastery in an area of knowledge can only be achieved with constant learning and development. 
 										Below, I present personal and professional projects that have brought experience and tools to my career.</p>
 
 									<section class="features">
 										<article>
-											<a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>
-											<h3 class="major">RP1</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
-											<a href="#" class="special">Learn more</a>
+											<a href="global_respone_covid-19.html" class="image"><img src="images/Global_covid/1.png" alt="" /></a>
+											<h3 class="major">Global Covid-19 relation of Venezuela</h3>
+											<p>The goal in this project was to study if It could be possible the construction of a model
+												that use the global data to make predictions about Covid-19 at Venezuela.</p>
+											<a href="global_respone_covid-19.html" class="special">Learn more</a>
 										</article>
-										<article>
+										<!--<article>
 											<a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>
-											<h3 class="major">RP2</h3>
+											<h3 class="major">Nisl placerat</h3>
 											<p>Lorem ipsum dolor sit amet, consectetur adipiscing vehicula id nulla dignissim dapibus ultrices.</p>
 											<a href="#" class="special">Learn more</a>
-										</article>
-									</section>-->
+										</article>-->
+									</section>
 
 								</div>
 							</div>
