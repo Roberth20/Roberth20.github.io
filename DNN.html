@@ -6,11 +6,13 @@
 -->
 <html>
 	<head>
-		<title>Global respone of covid-19 in Venezuela</title>
+		<title>DNN for Covid-19</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -42,9 +44,9 @@
 					<section id="wrapper">
 						<header>
 							<div class="inner">
-								<h2>Global Covid-19 relation of Venezuela</h2>
-								<p>The goal in this project was to study if It could be possible the construction of a model
-									that use the global data to make predictions about Covid-19 at Venezuela.</p>
+								<h2>DNN to predict Covid-19 in Colombia</h2>
+								<p>Construction of a Deep Neural Network based on a SIR model 
+									to predict the behavior of Covid-19 in Colombia.</p>
 							</div>
 						</header>
 
@@ -52,64 +54,68 @@
 							<div class="wrapper">
 								<div class="inner">
 
-									<h3 class="major">The first hypothesis</h3>
-									<p>The relationship between Venezuela and the rest of the world's countries was studied. 
-										To find this it was necessary to scale the data of all the countries, after that,
-										explore the data graphically. It was observed that the graphs for each country seem to have some 
-										similarity between them,
-										therefore, the linear correlation of each country with Venezuela was tested.
-										It found that there is a linear relationship with certain countries, 
-										these were used as independent variables in a linear regression model. 
-										The results obtained in this way were good, but with a deficiency in the precision compared to real data. 
+									<h3 class="major">The Project</h3>
+									<p>The implementation of neural networks is widely used to solve complex problems, 
+										such as the construction of epidemiological models. One of the best known models 
+										is the SIR, which divides the population into 3 groups, called Susceptible, 
+										Infected and Recovered. Related to each other by a set of differential equations, 
+										these are used for its construction. 
 									</p>
+									<p>
+										However, a differential equation can be modeled, without prior knowledge, 
+										using neural networks, as explained in this article <a href="https://arxiv.org/pdf/1711.10561.pdf" target="_blank">Physics-informed neural networks:  A deeplearning framework for solving forward and inverse problems involving nonlinear partial differential equations.</a>
+										Therefore, for the Project onstruction and study of Deep Neural Networks for a SIR model of Covid-19 in Colombia,
+										this concept was used in its development. 
+									</p>
+									<h3 class="major">Development</h3>
+									<p>To achieve this goal, 3 neural networks were built, each one to model 
+										each population group (Suceptible, Infected, Recovered), and each one was 
+										assigned a corresponding data set. This data was restructured to predict 10 
+										days into the future, using 15 days into the past, these client-defined constants.
+									</p>
+									<p>
+										The neural networks were built as a dense network with 3 layers of 256 neurons each, 
+										with a Long short-term memory (LSTM) activation function, a Dropout layer 
+										(to avoid ovefitting) and an output neuron for the value of prediction.
+									</p>
+									<h3 class="major">Results</h3>
+									<p>After training the networks, their performance was evaluated. The results can be 
+										seen in the graphs below.</p>
 									<div class="row gtr-uniform">
-												<div class="col-6"><span class="image fit"><img src="images/Global_covid/1.png" alt="" /></span></div>
-												<div class="col-6"><span class="image fit"><img src="images/Global_covid/2.png" alt="" /></span></div>
+										<div class="col-4"><span class="image fit"><img src="images/dnn/sus.png" alt="" /></span></div>
+										<div class="col-4"><span class="image fit"><img src="images/dnn/inf.png" alt="" /></span></div>
+										<div class="col-4"><span class="image fit"><img src="images/dnn/rec.png" alt="" /></span></div>
+										
 									</div>
 									<br>
-									<h3 class="major">The second thougth</h3>
-									<p>Due to this, it was decided to study the case with a VARMA multivariable time series model. 
-										It was evaluated the AdFuller test for seasonality of the data and the Granger causality test for the 
-										causality relationship between the variables, The results from the tests determined that this model was
-										not viable.
-									</p>
-									<h3 class="major">Last resort</h3>
-									<p>Finally, a multivariate ARIMA model implemented that presented good results for individual 
-										predictions, but was very imprecise when combining all predictors linearly. This effect was due to the 
-										gap in the peaks of infections between each country and their variations in scale (the data being stationary).
-										In conclusion, the data obtained show that a global model for a single country is not valid in terms 
-										of precision, but it is useful for providing indications of contagion trends. This is perfect for 
-										confirming results from local models in each country, like Holt's Exponential Smoothing, SIR or 
-										SEIR model, ARIMA and ARIMAX.</p>
-									<div class="row gtr-uniform">
-										<div class="col-12"><span class="image fit"><img src="images/Global_covid/3.png" alt="" /></span></div>
-									</div>
 									<br>
-									<p>One of the biggest obstacles in this study was the irregularity of the data from Venezuela.
-										As can be seen, they tend to be very erratic, almost random. This pattern makes it difficult to
-										ability of the model to make accurate predictions. You can test here 
-										<a href="index.html"> interactive demo dashboard</a> 
-										of the project to go deeper on the graphs.
+									<p> We can observe that the networks show a behavior similar to that of the data, 
+										detailing how the population of recovered people has a smoother movement 
+										compared to the original data. All networks obtained an R2 score higher than 0.9, 
+										proving to be efficient and consistent with the data.
 									</p>
+									<p>As a final thought, there is the possibility of improving the performance of the 
+										network by adjusting the days in the past that are used to make the prediction, 
+										along with the days in the future to predict. An ideal combination of these values 
+										has the potential to more accurately display future events.</p>
 									<h3 class="major">Related projects</h3>
 									<p>Reaching mastery in an area of knowledge can only be achieved with constant learning and development. 
 										Below, I present personal and professional projects that have brought experience and tools to my career.</p>
 
 									<section class="features">
 										<article>
+											<a href="global_respone_covid-19.html" class="image"><img src="images/Global_covid/1.png" alt="" /></a>
+											<h3 class="major">Global Covid-19 relation of Venezuela</h3>
+											<p>The goal in this project was to study if It could be possible the construction of a model
+												that use the global data to make predictions about Covid-19 at Venezuela.</p>
+											<a href="global_respone_covid-19.html" class="special">Learn more</a>
+										</article>
+										<article>
 											<a href="sir_model.html" class="image"><img src="images/sir_model/portfolio.png" alt="" /></a>
 											<h3 class="major">SIR model for Covid-19</h3>
 											<p>Implementation from scratch of a SIR model with Exponential Smoothing to forecast 
 												future infections in the population of Colombia.</p>
 											<a href="sir_model.html" class="special">Learn more</a>
-										</article>
-										<article>
-											<a href="DNN.html" class="image"><img src="images/dnn/inf.png" alt="" /></a>
-											<h3 class="major">DNN for Covid-19</h3>
-											<p>Construction of a Deep Neural Network based on a SIR model to predict
-												the behavior of Covid-19 in Colombia.
-											</p>
-											<a href="DNN.html" class="special">Learn more</a>
 										</article>
 									</section>
 
