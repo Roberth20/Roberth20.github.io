@@ -6,11 +6,13 @@
 -->
 <html>
 	<head>
-		<title>Text Recomendation System</title>
+		<title>Mercado Libre bot on Telegram</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -19,7 +21,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="index.html">Roberth Marcano</a></h1>
+						<h1><a href="index.html">Roberth Marcano </a></h1>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
@@ -42,10 +44,8 @@
 					<section id="wrapper">
 						<header>
 							<div class="inner">
-								<h2>Machine learning model to recomend text</h2>
-								<p>The goal in this project was develop a system to recomend text (courses
-									on a website) using a database and machine learning techniques.
-								</p>
+								<h2>Mercado Libre bot on Telegram</h2>
+								<p>Custom Telegram bot to receive alerts of the products on Mercado Libre Brasil</p>
 							</div>
 						</header>
 
@@ -53,36 +53,52 @@
 							<div class="wrapper">
 								<div class="inner">
 
-									<h3 class="major">Brief description of work</h3>
-									<p>The Machine Learning project for text recommendation began by studying 
-										the information and structure contained in the database related to it. 
-										Once this step was done, it was necessary to clean and adjust the format 
-										of the data to convert it into information suitable for use in the system 
-										that was being developed.
+									<h3 class="major">The Project</h3>
+									<p>The objective was the development of a tool that would be 
+										able to extend the Mercado Libre Brasil API. The client will receive, 
+										in real time and directly to their mobile phone, notifications about 
+										products of interest that are published.
 									</p>
-
-									<p>Using natural language processing (NLP) techniques, a system was built that, 
-										by means of sentences or words, performs a text search by similarity in the 
-										database and returns them in JSON format for use in Web applications.
+									<h3 class="major">The bot</h3>
+									<p>The program was built, solving 2 tasks separately. First, a module or script
+										in charge of obtaining the new products that are published, and on the other hand, 
+										one in charge of sending this information to the user. At the beginning, the objective 
+										was to receive notifications through Whatsapp, however, it was decided, 
+										together with the client, to use the Telegram platform.
 									</p>
-										
-									<p>Once the system is finished, it is deployed in the form of an API to offer 
-										the service. As a future step, in agreement with the client, it can be 
-										integrated into a web service and data retribution can be automated, 
-										without the need for user intervention.
+									<p>
+										The section of the program in charge of the API, since by construction it does not offer 
+										the possibility of only obtaining new products, the script was designed to keep track 
+										of all the products of interest in a database that will serve as a point of comparison 
+										for new products. In this way, every 10 minutes the program calls the API for the 
+										required product, then it is compared with the data and if it passes the test, 
+										it is sent to the user through the second part.
 									</p>
-
+									<p>
+										The module in charge of Telegram consists on a bot of this platform, 
+										it is private by client requirement. The bot works as a front-end for data
+										acquisition from users and as a base to send the information obtained in the 
+										previous section. This bot was designed with the ability to offer help to the 
+										user at any time, manages the database with the records and products to search for, 
+										handles the addition of filters or search requirements entered by the user 
+										(they are passed to the previous section if they exist) and fulfills, 
+										with its main function, to notify the user about new publications.
+									</p>
+									<p>
+										Currently, the bot is functional on the client's server, with a copy under
+										development to optimize visual aspects and add more features.
+									</p>
 									<h3 class="major">Related projects</h3>
 									<p>Reaching mastery in an area of knowledge can only be achieved with constant learning and development. 
 										Below, I present personal and professional projects that have brought experience and tools to my career.</p>
 
 									<section class="features">
 										<article>
-											<a href="mlb_bot.html" class="image"><img src="images/mercado-livre.webp" alt="" /></a>
-											<h3 class="major">Mercado Libre bot on Telegram</h3>
-											<p>Custom Telegram bot to receive alerts of the products on Mercado Libre Brasil
-											</p>
-											<a href="mlb_bot.html" class="special">Learn more</a>
+											<a href="ML_rec_text.html" class="image"><img src="images/text_rec_sys/criteria.png" alt="" /></a>
+											<h3 class="major">Text Recomendation System</h3>
+											<p>The goal in this project was develop a system to recomend text (courses
+												on a website) using a database and machine learning techniques.</p>
+											<a href="ML_rec_text.html" class="special">Learn more</a>
 										</article>
 									</section>
 
